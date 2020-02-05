@@ -35,15 +35,15 @@ var (
 	settings = []string{
 		"PrivilegeRights",
 		"RegistryValues",
-		"EnableLUA",
-		"FilterAdministratorToken",
-		"LocalAccountTokenFilterPolicy",
 	}
 	// registry keys keywords to look for
 	registryKeys = []string{
 		"RequireSecuritySignature",
 		"EnableSecuritySignature",
 		"LmCompatibilityLevel",
+		"EnableLUA",
+		"FilterAdministratorToken",
+		"LocalAccountTokenFilterPolicy",
 	}
 
 	// dangerous privileges
@@ -103,7 +103,7 @@ func main() {
 						regVal := value.LST.S[1]
 						fmt.Println("\tValue -> " + regVal)
 						if *bloodHound {
-							if regVal == "0" {
+							if regVal == "0" && strings.Contains(value.N, "Signature") {
 								executeQuery("computersWithoutSMBSigning", "none", getGPOName(GPO(gpo.MS.S)), session)
 							}
 						}
@@ -125,7 +125,7 @@ func main() {
 					if isIn(s.N, dangerousPrivileges) {
 						fmt.Println("[+] Found GPO that assigns: " + s.N)
 						fmt.Println(gpo.MS.S)
-						userSID := strings.Trim(s.N, "*")
+						userSID := strings.Trim(s.Text, "*")
 						fmt.Println("\t[+] " + userSID)
 						if *bloodHound {
 							executeQuery("usersAdminViaURA", userSID, getGPOName(GPO(gpo.MS.S)), session)
