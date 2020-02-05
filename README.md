@@ -17,7 +17,7 @@ go install
 ```
 
 ```
-./power-gpo-parser --gpo utf8_corp_gpo.txt --bloodhound
+NEO4J_USER=neo4j NEO4J_PASSWORD=bloodhound NEO4J_SERVER=localhost ./power-gpo-parser --gpo utf8_corp_gpo.txt --bloodhound
 ```
 
 
