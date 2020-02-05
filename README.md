@@ -1,5 +1,5 @@
 ```
-Get-DomainPolicyData -Polocy | exort-clixml gpo.xml
+Get-DomainPolicyData -Policy All | exort-clixml gpo.xml
 ```
 
 ```
