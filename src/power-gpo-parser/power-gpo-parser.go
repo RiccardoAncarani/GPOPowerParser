@@ -53,7 +53,6 @@ var (
 		"SeBackupPrivilege",
 		"SeImpersonationPrivilege",
 		"SeRestorePrivilege",
-		"SeCreateToken",
 		"SeTakeOwnership",
 		"SeTcbPrivilege",
 		"SeCreateToken",
